@@ -1,10 +1,3 @@
-# custom
-.vscode/
-.secrets/
-.env
-prod.env
-
-
 # standard
 *.egg-info
 *.pot
@@ -20,3 +13,10 @@ tests/coverage_html/
 tests/.coverage
 build/
 tests/report/
+
+# custom
+.vscode/
+.secrets/
+.env
+prod.env
+db.sqlite3
