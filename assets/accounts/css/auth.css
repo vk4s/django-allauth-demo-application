@@ -1,0 +1,35 @@
+.socialaccount_ballot > .socialaccount_providers, .top-menu {
+    display: flex;
+    /* margin: 0; */
+    padding: 0;
+}
+.socialaccount_ballot > ul.socialaccount_providers > li, .top-menu > li {
+    list-style: none;
+    margin: .25rem;
+}
+
+ul.socialaccount_providers > li > a {
+    display: block;
+    padding: .5rem 1rem ;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: .25rem;
+    text-decoration: none;
+}
+
+ul.socialaccount_providers > li:hover > a {
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.top-menu {
+    align-items: center;
+    margin: 2rem 0rem;
+}
+
+.top-menu > li {
+    margin: 0 0.25rem;
+}
+.top-menu > li > a {
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    padding: .5rem;
+    border-radius: .25rem;
+}

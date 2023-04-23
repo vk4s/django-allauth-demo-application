@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
     # 3rd party apps
     "allauth",
     "allauth.account",
@@ -156,10 +157,10 @@ SOCIALACCOUNT_PROVIDERS = {
             'key': ''
         },
         'AUTH_PARAMS': {
-            'access_type': 'offline', #'online/offline
+            'access_type': 'offline',  #'online/offline
         },
         'OAUTH_PKCE_ENABLED': True,
-        'VERIFIED_EMAIL':True,
+        'VERIFIED_EMAIL': True,
     },
     'github': {
         'SCOPE': [
@@ -172,7 +173,7 @@ SOCIALACCOUNT_PROVIDERS = {
             'secret': GITHUB_CLIENT_SECRET,
             'key': ''
         },
-        'VERIFIED_EMAIL':True,
+        'VERIFIED_EMAIL': True,
     }
 }
 
@@ -199,11 +200,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "media"), os.path.join(BASE_DIR, "assets"))
 
 LOGIN_REDIRECT_URL = "/"
-LOGOUT_REDIRECT_URL = "login"
+LOGOUT_REDIRECT_URL = "account_login"
 
-LOGIN_URL = "login"
+LOGIN_URL = "account_login"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+# ALL AUTH SETTINGS
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email'
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_EMAIL_VERIFICATION = 'optional'
+ACCOUNT_MAX_EMAIL_ADDRESSES = 3
+ACCOUNT_USERNAME_BLACKLIST = ['admin', 'superuser']
+ACCOUNT_USERNAME_REQUIRED = True

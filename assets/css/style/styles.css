@@ -1,0 +1,24 @@
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+body {
+    margin: auto;
+    max-width: 800px;
+}
+
+input {
+    max-width: 25rem;
+}
+
+button  {
+    margin-top: 1rem;
+    min-width: 10rem;
+    max-width: max-content;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
