@@ -40,6 +40,7 @@ DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL", default=EMAIL_HOST_USER)
 # Database Settings
 DB_LOCATION = env("DB_LOCATION", default="")
 
+SITE_ID = 1
 
 # Application definition
 INSTALLED_APPS = [
@@ -49,6 +50,13 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    # 3rd party apps
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    # providers
+    "allauth.socialaccount.providers.github",
+    "allauth.socialaccount.providers.google",
 ]
 
 MIDDLEWARE = [
@@ -75,6 +83,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                # `allauth` needs this from django
+                "django.template.context_processors.request",
             ],
         },
     },
@@ -119,6 +129,52 @@ AUTH_PASSWORD_VALIDATORS = [
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    "django.contrib.auth.backends.ModelBackend",
+    # `allauth` specific authentication methods, such as login by e-mail
+    "allauth.account.auth_backends.AuthenticationBackend",
+]
+
+# AUTH Providers Keys
+GITHUB_CLIENT_ID = env("GITHUB_CLIENT_ID")
+GITHUB_CLIENT_SECRET = env("GITHUB_CLIENT_SECRET")
+GOOGLE_CLIENT_ID = env("GOOGLE_CLIENT_ID")
+GOOGLE_CLIENT_SECRET = env("GOOGLE_CLIENT_SECRET")
+
+# Provider specific settings
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'APP': {
+            'client_id': GOOGLE_CLIENT_ID,
+            'secret': GOOGLE_CLIENT_SECRET,
+            'key': ''
+        },
+        'AUTH_PARAMS': {
+            'access_type': 'offline', #'online/offline
+        },
+        'OAUTH_PKCE_ENABLED': True,
+        'VERIFIED_EMAIL':True,
+    },
+    'github': {
+        'SCOPE': [
+            'user',
+            'repo',
+            'read:org',
+        ],
+        'APP': {
+            'client_id': GITHUB_CLIENT_ID,
+            'secret': GITHUB_CLIENT_SECRET,
+            'key': ''
+        },
+        'VERIFIED_EMAIL':True,
+    }
+}
 
 
 # Internationalization
